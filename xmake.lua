@@ -11,11 +11,13 @@ if is_os("windows") then
 else
     add_cxflags("-MD", {force = true})
 end
---0add_requires("vcpkg::boost", {configs={runtime_link="shared", shared=true, debug=true}, alias = "boost"})
+add_requires("vcpkg::boost-asio", "vcpkg::boost-system", "vcpkg::boost-filesystem", {configs={runtime_link="shared", shared=true, debug=true}})
 
 target("cpp-pm")
     set_kind("binary")
     set_symbols("debug")
-    add_packages("vcpkg::boost")
-    add_includedirs("sources")
+    add_packages("vcpkg::boost-asio", "vcpkg::boost-system", "vcpkg::boost-filesystem")
+    add_headerfiles("source/*.h", "source/*.hpp")
     add_files("sources/*.cpp")
+
+    
