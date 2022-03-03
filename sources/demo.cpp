@@ -25,9 +25,17 @@ int main()
             pm.Info();
             continue;
         }
+		else if ("stop" == strHolder)
+		{
+			unsigned int uId;
+			strHolder.clear();
+			std::cin >> strHolder;
+			pm.StopProcess(static_cast<unsigned int>(std::atoi(strHolder.data())));
+			continue;
+		}
         auto nPos = strHolder.find_last_of("\\");
         strName = std::string::npos == nPos ? strHolder : strHolder.substr(nPos + 1);
-        pm.StartProcess(strName, strHolder, strErrInfo);
+        pm.StartProcess(strName, strHolder, "", strErrInfo);
     }
     return 0;
 }
