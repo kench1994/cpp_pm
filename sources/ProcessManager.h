@@ -1,5 +1,4 @@
 #pragma once
-#include "ctx.h"
 #include <map>
 #include <mutex>
 #include <atomic>
@@ -9,6 +8,8 @@
 #include <chrono>
 #include <unordered_map>
 #include <boost/process.hpp>
+#include <utils/io_service_pool.hpp>
+
 namespace pm
 {
     enum class enProcessStatus{
@@ -26,12 +27,12 @@ namespace pm
         std::string strProcessPath;
         std::string strArgs;
         std::shared_ptr<boost::process::child> spProcess;
-        //TODO:Ö±½Ó³ÉÔ±±äÁ¿»¹ÊÇÓÃÈÝÆ÷°ü¹ü?
+        //TODO:Ö±ï¿½Ó³ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?
         std::shared_ptr<std::chrono::system_clock::time_point> spLastUpTime, spLastDownTime;
         
     }ProcessWrap;
 
-    //TODO:Ö§³Örestart top delete  {namespace} ÕûÆ¬ÇøÓò
+    //TODO:Ö§ï¿½ï¿½restart top delete  {namespace} ï¿½ï¿½Æ¬ï¿½ï¿½ï¿½ï¿½
     class ProcessManager{
         public:
             ProcessManager();
@@ -41,7 +42,7 @@ namespace pm
             //todo: startup mode ? runtime path?
             int StartProcess(const std::string& strName, const std::string& strProcessPath, const std::string& strArgs, std::string& strErrInfo);
 
-			//TODO:¼Ó¸ökillÐÅºÅ½Ó¿Ú
+			//TODO:ï¿½Ó¸ï¿½killï¿½ÅºÅ½Ó¿ï¿½
 			int StopProcess(unsigned int id, bool bRemove = false);
 
 			int StopProcess(const std::vector<unsigned int>& vIds, bool bRemove = false);
@@ -49,7 +50,7 @@ namespace pm
 			//TODO:delete single / vecotr
 
 
-            //Êä³öµ½Ö¸¶¨µÄstream??
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½stream??
             int Info();
         private:
             std::mutex m_mtxProcess;

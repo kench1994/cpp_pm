@@ -36,7 +36,7 @@ namespace pm
             //(boost::process::std_out & boost::process::std_err) > pioe_out,
             boost::process::windows::show_normal,
             ec,
-            *(service::theCtx->spIO),
+            *utils::io_service_pool::instance().pick_io_service(),
             /*
             ///This handler is invoked before the process in launched, to setup parameters. The required signature is `void(Exec &)`, where `Exec` is a template parameter.
             constexpr boost::process::detail::make_handler_t<boost::process::detail::on_setup_>   on_setup;

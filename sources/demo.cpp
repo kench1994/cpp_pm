@@ -1,15 +1,11 @@
 #include <string>
 #include <iostream>
 #include "ProcessManager.h"
+#include <utils/io_service_pool.hpp>
 
 int main()
 {
-    //TODO:load balance io_service
-    service::theCtx = std::make_unique<service::Ctx>();
-    service::theCtx->spIO = std::make_shared<boost::asio::io_service>();
-	service::theCtx->spWork = std::make_shared<boost::asio::io_service::work>(*service::theCtx->spIO);
-    std::thread t([pIO = service::theCtx->spIO.get()](){pIO->run();});
-    t.detach();
+    utils::io_service_pool::instance().run();
 
     std::string strErrInfo;
     pm::ProcessManager pm;
