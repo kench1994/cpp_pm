@@ -3,11 +3,11 @@ if is_os("windows") then
     if(is_mode("release")) then
         set_config("vs_runtime", "MD")
         add_cxflags("-MD", {force = true})
-        set_installdir("build/x86/debug")
+        set_installdir("build/windows/x86/release")
     else
         set_config("vs_runtime", "MDd")
         add_cxflags("-MDd", {force = true})
-        set_installdir("build/x86/release")
+        set_installdir("build/windows/x86/debug")
     end
 else
     add_cxflags("-MD", {force = true})
