@@ -2,11 +2,9 @@
 #include <iostream>
 #include "ProcessManager.h"
 #include <utils/io_service_pool.hpp>
-
 int main()
 {
     utils::io_service_pool::instance().run();
-
     std::string strErrInfo;
     pm::ProcessManager pm;
     pm.Initialize(strErrInfo);
@@ -29,6 +27,11 @@ int main()
 			pm.StopProcess(static_cast<unsigned int>(std::atoi(strHolder.data())));
 			continue;
 		}
+        else if("ios" == strHolder)
+        {
+            utils::io_service_pool::instance().stop();
+            continue;
+        }
         auto nPos = strHolder.find_last_of("\\");
         strName = std::string::npos == nPos ? strHolder : strHolder.substr(nPos + 1);
         pm.StartProcess(strName, strHolder, "", strErrInfo);
