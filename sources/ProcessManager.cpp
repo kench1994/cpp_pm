@@ -145,7 +145,8 @@ namespace pm
         for(const auto& iter : m_mapProcess)
         {
             auto&& spProcess = iter.second;
-            std::cout << "name:" << spProcess->strName << ",process:" << spProcess->strProcessPath << std::endl;
+            std::cout << "name:" << spProcess->strName << ",process:" << spProcess->strProcessPath\
+             << ",still run:" << std::boolalpha << spProcess->spProcess->running() << std::endl;
         }
         return 0;
     }
